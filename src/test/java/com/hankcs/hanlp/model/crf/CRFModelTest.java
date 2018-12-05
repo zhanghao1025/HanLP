@@ -8,7 +8,6 @@ import com.hankcs.hanlp.corpus.document.sentence.word.IWord;
 import com.hankcs.hanlp.corpus.document.sentence.word.Word;
 import com.hankcs.hanlp.corpus.io.ByteArray;
 import com.hankcs.hanlp.corpus.io.IOUtil;
-import com.hankcs.hanlp.seg.CRF.CRFSegment;
 import com.hankcs.hanlp.utility.Predefine;
 import junit.framework.TestCase;
 
@@ -150,9 +149,9 @@ public class CRFModelTest extends TestCase
 
     public void testLoadModelWithBiGramFeature() throws Exception
     {
-        String path = HanLP.Config.CRFSegmentModelPath + Predefine.BIN_EXT;
+//        String path = HanLP.Config.CRFSegmentModelPath + Predefine.BIN_EXT;
         CRFModel model = new CRFModel(new BinTrie<FeatureFunction>());
-        model.load(ByteArray.createByteArray(path));
+//        model.load(ByteArray.createByteArray(path));
 
         Table table = new Table();
         String text = "人民生活进一步改善了";

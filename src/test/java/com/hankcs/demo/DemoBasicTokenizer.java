@@ -10,6 +10,7 @@
  */
 package com.hankcs.demo;
 
+import com.hankcs.hanlp.HanLP;
 import com.hankcs.hanlp.tokenizer.BasicTokenizer;
 
 /**
@@ -33,6 +34,7 @@ public class DemoBasicTokenizer
             BasicTokenizer.segment(text);
         }
         double costTime = (System.currentTimeMillis() - start) / (double) 1000;
-        System.out.printf("BasicTokenizer分词速度：%.2f字每秒\n", text.length() * pressure / costTime);
+//        System.out.printf(HanLP.segment(text));
+        System.out.printf ("BasicTokenizer分词速度：%.2f字每秒\n", text.length() * pressure / costTime);
     }
 }

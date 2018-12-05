@@ -22,7 +22,7 @@ public class PinyinScorer extends BaseScorer<PinyinKey>
     @Override
     protected PinyinKey generateKey(String sentence)
     {
-        PinyinKey pinyinKey = new PinyinKey(sentence);
+        PinyinKey pinyinKey = new PinyinKey();
         if (pinyinKey.size() == 0) return null;
         return pinyinKey;
     }

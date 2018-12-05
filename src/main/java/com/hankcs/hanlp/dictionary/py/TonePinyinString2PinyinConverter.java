@@ -40,9 +40,9 @@ public class TonePinyinString2PinyinConverter
             mapNumberKey.put(pinyin.toString(), pinyin);
             String pinyinWithToneMark = pinyin.getPinyinWithToneMark();
             String pinyinWithoutTone = pinyin.getPinyinWithoutTone();
-            Pinyin tone5 = String2PinyinConverter.convert2Tone5(pinyin);
+//            Pinyin tone5 = String2PinyinConverter.convert2Tone5(pinyin);
             mapKey.put(pinyinWithToneMark, pinyin);
-            mapKey.put(pinyinWithoutTone, tone5);
+//            mapKey.put(pinyinWithoutTone, tone5);
         }
         trie = new Trie().remainLongest();
         trie.addAllKeyword(mapKey.keySet());

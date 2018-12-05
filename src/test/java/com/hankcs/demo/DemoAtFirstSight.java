@@ -12,6 +12,18 @@
 package com.hankcs.demo;
 
 import com.hankcs.hanlp.HanLP;
+import com.hankcs.hanlp.corpus.dependency.CoNll.CoNLLSentence;
+import com.hankcs.hanlp.corpus.dependency.CoNll.CoNLLWord;
+import com.hankcs.hanlp.model.perceptron.Config;
+import com.hankcs.hanlp.model.perceptron.PerceptronPOSTagger;
+import com.hankcs.hanlp.model.perceptron.PerceptronTrainer;
+import com.hankcs.hanlp.seg.Segment;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 第一个Demo，惊鸿一瞥
@@ -22,8 +34,13 @@ public class DemoAtFirstSight
 {
     public static void main(String[] args)
     {
-        System.out.println("首次编译运行时，HanLP会自动构建词典缓存，请稍候……");
-        HanLP.Config.enableDebug();         // 为了避免你等得无聊，开启调试模式说点什么:-)
-        System.out.println(HanLP.segment("你好，欢迎使用HanLP汉语处理包！接下来请从其他Demo中体验HanLP丰富的功能~"));
+
+        PerceptronPOSTagger tagger = null;
+        try {
+            tagger = new PerceptronPOSTagger(Config.POS_MODEL_FILE);
+        System.out.println(Arrays.toString(tagger.tag("膳食营养 交响乐团 谭利华 在 布达拉宫 广场 演出".split(" "))));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

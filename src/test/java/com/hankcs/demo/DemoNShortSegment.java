@@ -32,8 +32,8 @@ public class DemoNShortSegment
                 "新北商贸有限公司",
         };
         for (String sentence : testCase)
-        {
-            System.out.println("N-最短分词：" + nShortSegment.seg(sentence) + "\n最短路分词：" + shortestSegment.seg(sentence));
-        }
+            {
+                System.out.println("N-最短分词：" + nShortSegment.seg(sentence) + "\n最短路分词：" + shortestSegment.seg(sentence));
+            }
     }
 }

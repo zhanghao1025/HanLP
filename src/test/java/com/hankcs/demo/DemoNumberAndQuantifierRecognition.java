@@ -21,6 +21,7 @@ public class DemoNumberAndQuantifierRecognition
 {
     public static void main(String[] args)
     {
+        //数量词识别开启
         StandardTokenizer.SEGMENT.enableNumberQuantifierRecognize(true);
         String[] testCase = new String[]
                 {

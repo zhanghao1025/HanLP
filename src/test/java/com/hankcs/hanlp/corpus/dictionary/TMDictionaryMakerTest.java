@@ -15,6 +15,6 @@ public class TMDictionaryMakerTest extends TestCase
         tmDictionaryMaker.addPair("ij", "kl");
         tmDictionaryMaker.addPair("ij", "kl");
         tmDictionaryMaker.addPair("X", "Y");
-//        System.out.println(tmDictionaryMaker);
+        System.out.println(tmDictionaryMaker);
     }
 }

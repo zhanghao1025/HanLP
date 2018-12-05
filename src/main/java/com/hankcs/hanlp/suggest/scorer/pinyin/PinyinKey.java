@@ -16,7 +16,7 @@ import com.hankcs.hanlp.algorithm.LongestCommonSubstring;
 import com.hankcs.hanlp.collection.dartsclone.Pair;
 import com.hankcs.hanlp.dictionary.py.Pinyin;
 import com.hankcs.hanlp.dictionary.py.PinyinUtil;
-import com.hankcs.hanlp.dictionary.py.String2PinyinConverter;
+//import com.hankcs.hanlp.dictionary.py.String2PinyinConverter;
 import com.hankcs.hanlp.suggest.scorer.ISentenceKey;
 
 import java.util.Arrays;
@@ -41,45 +41,45 @@ public class PinyinKey implements Comparable<PinyinKey>, ISentenceKey<PinyinKey>
      */
     char[] firstCharArray;
 
-    public PinyinKey(String sentence)
-    {
-        Pair<List<Pinyin>, List<Boolean>> pair = String2PinyinConverter.convert2Pair(sentence, true);
-        pinyinArray = PinyinUtil.convertList2Array(pair.getKey());
-        List<Boolean> booleanList = pair.getValue();
-        int pinyinSize = 0;
-        for (Boolean yes : booleanList)
-        {
-            if (yes)
-            {
-                ++pinyinSize;
-            }
-        }
-        int firstCharSize = 0;
-        for (Pinyin pinyin : pinyinArray)
-        {
-            if (pinyin != Pinyin.none5)
-            {
-                ++firstCharSize;
-            }
-        }
-
-        pyOrdinalArray = new int[pinyinSize];
-        firstCharArray = new char[firstCharSize];
-        pinyinSize = 0;
-        firstCharSize = 0;
-        Iterator<Boolean> iterator = booleanList.iterator();
-        for (int i = 0; i < pinyinArray.length; ++i)
-        {
-            if (iterator.next())
-            {
-                pyOrdinalArray[pinyinSize++] = pinyinArray[i].ordinal();
-            }
-            if (pinyinArray[i] != Pinyin.none5)
-            {
-                firstCharArray[firstCharSize++] = pinyinArray[i].getFirstChar();
-            }
-        }
-    }
+//    public PinyinKey(String sentence)
+//    {
+//        Pair<List<Pinyin>, List<Boolean>> pair = String2PinyinConverter.convert2Pair(sentence, true);
+//        pinyinArray = PinyinUtil.convertList2Array(pair.getKey());
+//        List<Boolean> booleanList = pair.getValue();
+//        int pinyinSize = 0;
+//        for (Boolean yes : booleanList)
+//        {
+//            if (yes)
+//            {
+//                ++pinyinSize;
+//            }
+//        }
+//        int firstCharSize = 0;
+//        for (Pinyin pinyin : pinyinArray)
+//        {
+//            if (pinyin != Pinyin.none5)
+//            {
+//                ++firstCharSize;
+//            }
+//        }
+//
+//        pyOrdinalArray = new int[pinyinSize];
+//        firstCharArray = new char[firstCharSize];
+//        pinyinSize = 0;
+//        firstCharSize = 0;
+//        Iterator<Boolean> iterator = booleanList.iterator();
+//        for (int i = 0; i < pinyinArray.length; ++i)
+//        {
+//            if (iterator.next())
+//            {
+//                pyOrdinalArray[pinyinSize++] = pinyinArray[i].ordinal();
+//            }
+//            if (pinyinArray[i] != Pinyin.none5)
+//            {
+//                firstCharArray[firstCharSize++] = pinyinArray[i].getFirstChar();
+//            }
+//        }
+//    }
 
     @Override
     public int compareTo(PinyinKey o)

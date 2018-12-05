@@ -11,23 +11,7 @@
  */
 package com.hankcs.hanlp.corpus;
 
-import com.hankcs.hanlp.HanLP;
-import com.hankcs.hanlp.corpus.io.IOUtil;
-import com.hankcs.hanlp.corpus.tag.Nature;
-import com.hankcs.hanlp.dictionary.CoreDictionary;
-import com.hankcs.hanlp.dictionary.CustomDictionary;
-import com.hankcs.hanlp.dictionary.nr.TranslatedPersonDictionary;
-import com.hankcs.hanlp.seg.Dijkstra.DijkstraSegment;
-import com.hankcs.hanlp.seg.common.Term;
-import com.hankcs.hanlp.tokenizer.StandardTokenizer;
 import junit.framework.TestCase;
-
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * @author hankcs
@@ -75,7 +59,7 @@ public class TestMakeTranslateName extends TestCase
 //
     public void testQuery() throws Exception
     {
-        assertTrue(TranslatedPersonDictionary.containsKey("汤姆"));
+//        assertTrue(TranslatedPersonDictionary.containsKey("汤姆"));
 //        HanLP.Config.enableDebug();
 //        System.out.println(TranslatedPersonDictionary.containsKey("汤姆"));
 //        System.out.println(TranslatedPersonDictionary.containsKey("汤"));

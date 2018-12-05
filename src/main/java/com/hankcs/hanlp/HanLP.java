@@ -15,7 +15,6 @@ import com.hankcs.hanlp.corpus.dependency.CoNll.CoNLLSentence;
 import com.hankcs.hanlp.corpus.io.IIOAdapter;
 import com.hankcs.hanlp.dependency.nnparser.NeuralNetworkDependencyParser;
 import com.hankcs.hanlp.dictionary.py.Pinyin;
-import com.hankcs.hanlp.dictionary.py.PinyinDictionary;
 import com.hankcs.hanlp.dictionary.ts.*;
 import com.hankcs.hanlp.mining.phrase.IPhraseExtractor;
 import com.hankcs.hanlp.mining.phrase.MutualInformationEntropyPhraseExtractor;
@@ -23,8 +22,6 @@ import com.hankcs.hanlp.mining.word.NewWordDiscover;
 import com.hankcs.hanlp.mining.word.WordInfo;
 import com.hankcs.hanlp.model.crf.CRFLexicalAnalyzer;
 import com.hankcs.hanlp.model.perceptron.PerceptronLexicalAnalyzer;
-import com.hankcs.hanlp.seg.CRF.CRFSegment;
-import com.hankcs.hanlp.seg.HMM.HMMSegment;
 import com.hankcs.hanlp.seg.NShort.NShortSegment;
 import com.hankcs.hanlp.seg.Other.DoubleArrayTrieSegment;
 import com.hankcs.hanlp.seg.Segment;
@@ -73,7 +70,7 @@ public class HanLP
         /**
          * 用户自定义词典路径
          */
-        public static String CustomDictionaryPath[] = new String[]{"data/dictionary/custom/CustomDictionary.txt"};
+        public static String CustomDictionaryPath[] = new String[]{"data/dictionary/custom/CustomDictionary.txt","data/dictionary/custom/人名词典.txt"};
         /**
          * 2元语法词典路径
          */
@@ -91,6 +88,11 @@ public class HanLP
          * 人名词典路径
          */
         public static String PersonDictionaryPath = "data/dictionary/person/nr.txt";
+
+        /**
+         * 营养词典路径
+         */
+        public static String YingYangDictionaryPath = "data/dictionary/yingyang/yy.txt";
         /**
          * 人名词典转移矩阵路径
          */
@@ -119,17 +121,17 @@ public class HanLP
         /**
          * 拼音词典路径
          */
-        public static String PinyinDictionaryPath = "data/dictionary/pinyin/pinyin.txt";
+//        public static String PinyinDictionaryPath = "data/dictionary/pinyin/pinyin.txt";
 
         /**
          * 音译人名词典
          */
-        public static String TranslatedPersonDictionaryPath = "data/dictionary/person/nrf.txt";
+//        public static String TranslatedPersonDictionaryPath = "data/dictionary/person/nrf.txt";
 
         /**
          * 日本人名词典路径
          */
-        public static String JapanesePersonDictionaryPath = "data/dictionary/person/nrj.txt";
+//        public static String JapanesePersonDictionaryPath = "data/dictionary/person/nrj.txt";
 
         /**
          * 字符类型对应表
@@ -248,6 +250,7 @@ public class HanLP
                 CoreStopWordDictionaryPath = root + p.getProperty("CoreStopWordDictionaryPath", CoreStopWordDictionaryPath);
                 CoreSynonymDictionaryDictionaryPath = root + p.getProperty("CoreSynonymDictionaryDictionaryPath", CoreSynonymDictionaryDictionaryPath);
                 PersonDictionaryPath = root + p.getProperty("PersonDictionaryPath", PersonDictionaryPath);
+                YingYangDictionaryPath = root + p.getProperty("YingYangDictionaryPath", YingYangDictionaryPath);
                 PersonDictionaryTrPath = root + p.getProperty("PersonDictionaryTrPath", PersonDictionaryTrPath);
                 String[] pathArray = p.getProperty("CustomDictionaryPath", "data/dictionary/custom/CustomDictionary.txt").split(";");
                 String prePath = root;
@@ -270,9 +273,9 @@ public class HanLP
                 CustomDictionaryPath = pathArray;
                 tcDictionaryRoot = root + p.getProperty("tcDictionaryRoot", tcDictionaryRoot);
                 if (!tcDictionaryRoot.endsWith("/")) tcDictionaryRoot += '/';
-                PinyinDictionaryPath = root + p.getProperty("PinyinDictionaryPath", PinyinDictionaryPath);
-                TranslatedPersonDictionaryPath = root + p.getProperty("TranslatedPersonDictionaryPath", TranslatedPersonDictionaryPath);
-                JapanesePersonDictionaryPath = root + p.getProperty("JapanesePersonDictionaryPath", JapanesePersonDictionaryPath);
+//                PinyinDictionaryPath = root + p.getProperty("PinyinDictionaryPath", PinyinDictionaryPath);
+//                TranslatedPersonDictionaryPath = root + p.getProperty("TranslatedPersonDictionaryPath", TranslatedPersonDictionaryPath);
+//                JapanesePersonDictionaryPath = root + p.getProperty("JapanesePersonDictionaryPath", JapanesePersonDictionaryPath);
                 PlaceDictionaryPath = root + p.getProperty("PlaceDictionaryPath", PlaceDictionaryPath);
                 PlaceDictionaryTrPath = root + p.getProperty("PlaceDictionaryTrPath", PlaceDictionaryTrPath);
                 OrganizationDictionaryPath = root + p.getProperty("OrganizationDictionaryPath", OrganizationDictionaryPath);
@@ -556,28 +559,28 @@ public class HanLP
      * @param remainNone 有些字没有拼音（如标点），是否保留它们的拼音（true用none表示，false用原字符表示）
      * @return 一个字符串，由[拼音][分隔符][拼音]构成
      */
-    public static String convertToPinyinString(String text, String separator, boolean remainNone)
-    {
-        List<Pinyin> pinyinList = PinyinDictionary.convertToPinyin(text, true);
-        int length = pinyinList.size();
-        StringBuilder sb = new StringBuilder(length * (5 + separator.length()));
-        int i = 1;
-        for (Pinyin pinyin : pinyinList)
-        {
-
-            if (pinyin == Pinyin.none5 && !remainNone)
-            {
-                sb.append(text.charAt(i - 1));
-            }
-            else sb.append(pinyin.getPinyinWithoutTone());
-            if (i < length)
-            {
-                sb.append(separator);
-            }
-            ++i;
-        }
-        return sb.toString();
-    }
+//    public static String convertToPinyinString(String text, String separator, boolean remainNone)
+//    {
+//        List<Pinyin> pinyinList = PinyinDictionary.convertToPinyin(text, true);
+//        int length = pinyinList.size();
+//        StringBuilder sb = new StringBuilder(length * (5 + separator.length()));
+//        int i = 1;
+//        for (Pinyin pinyin : pinyinList)
+//        {
+//
+//            if (pinyin == Pinyin.none5 && !remainNone)
+//            {
+//                sb.append(text.charAt(i - 1));
+//            }
+//            else sb.append(pinyin.getPinyinWithoutTone());
+//            if (i < length)
+//            {
+//                sb.append(separator);
+//            }
+//            ++i;
+//        }
+//        return sb.toString();
+//    }
 
     /**
      * 转化为拼音
@@ -585,10 +588,10 @@ public class HanLP
      * @param text 待解析的文本
      * @return 一个拼音列表
      */
-    public static List<Pinyin> convertToPinyinList(String text)
-    {
-        return PinyinDictionary.convertToPinyin(text);
-    }
+//    public static List<Pinyin> convertToPinyinList(String text)
+//    {
+//        return PinyinDictionary.convertToPinyin(text);
+//    }
 
     /**
      * 转化为拼音（首字母）
@@ -598,23 +601,23 @@ public class HanLP
      * @param remainNone 有些字没有拼音（如标点），是否保留它们（用none表示）
      * @return 一个字符串，由[首字母][分隔符][首字母]构成
      */
-    public static String convertToPinyinFirstCharString(String text, String separator, boolean remainNone)
-    {
-        List<Pinyin> pinyinList = PinyinDictionary.convertToPinyin(text, remainNone);
-        int length = pinyinList.size();
-        StringBuilder sb = new StringBuilder(length * (1 + separator.length()));
-        int i = 1;
-        for (Pinyin pinyin : pinyinList)
-        {
-            sb.append(pinyin.getFirstChar());
-            if (i < length)
-            {
-                sb.append(separator);
-            }
-            ++i;
-        }
-        return sb.toString();
-    }
+//    public static String convertToPinyinFirstCharString(String text, String separator, boolean remainNone)
+//    {
+////        List<Pinyin> pinyinList = PinyinDictionary.convertToPinyin(text, remainNone);
+////        int length = pinyinList.size();
+//        StringBuilder sb = new StringBuilder(length * (1 + separator.length()));
+//        int i = 1;
+//        for (Pinyin pinyin : pinyinList)
+//        {
+//            sb.append(pinyin.getFirstChar());
+//            if (i < length)
+//            {
+//                sb.append(separator);
+//            }
+//            ++i;
+//        }
+//        return sb.toString();
+//    }
 
     /**
      * 分词

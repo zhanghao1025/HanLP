@@ -12,9 +12,9 @@
 package com.hankcs.hanlp.seg.Viterbi;
 
 import com.hankcs.hanlp.HanLP;
-import com.hankcs.hanlp.recognition.nr.JapanesePersonRecognition;
+//import com.hankcs.hanlp.recognition.nr.JapanesePersonRecognition;
 import com.hankcs.hanlp.recognition.nr.PersonRecognition;
-import com.hankcs.hanlp.recognition.nr.TranslatedPersonRecognition;
+//import com.hankcs.hanlp.recognition.nr.TranslatedPersonRecognition;
 import com.hankcs.hanlp.recognition.ns.PlaceRecognition;
 import com.hankcs.hanlp.recognition.nt.OrganizationRecognition;
 import com.hankcs.hanlp.seg.WordBasedSegment;
@@ -77,14 +77,14 @@ public class ViterbiSegment extends WordBasedSegment
             {
                 PersonRecognition.recognition(vertexList, wordNetOptimum, wordNetAll);
             }
-            if (config.translatedNameRecognize)
-            {
-                TranslatedPersonRecognition.recognition(vertexList, wordNetOptimum, wordNetAll);
-            }
-            if (config.japaneseNameRecognize)
-            {
-                JapanesePersonRecognition.recognition(vertexList, wordNetOptimum, wordNetAll);
-            }
+//            if (config.translatedNameRecognize)
+//            {
+//                TranslatedPersonRecognition.recognition(vertexList, wordNetOptimum, wordNetAll);
+//            }
+//            if (config.japaneseNameRecognize)
+//            {
+//                JapanesePersonRecognition.recognition(vertexList, wordNetOptimum, wordNetAll);
+//            }
             if (config.placeRecognize)
             {
                 PlaceRecognition.recognition(vertexList, wordNetOptimum, wordNetAll);

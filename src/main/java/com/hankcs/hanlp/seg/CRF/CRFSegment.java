@@ -68,15 +68,15 @@ public class CRFSegment extends CharacterBasedSegment
     }
 
     // 已废弃，请使用功能更丰富、设计更优雅的{@link com.hankcs.hanlp.model.crf.CRFLexicalAnalyzer}。
-    public CRFSegment()
-    {
-        this(HanLP.Config.CRFSegmentModelPath);
-    }
+//
 
     @Override
     protected List<Term> roughSegSentence(char[] sentence)
     {
-        if (sentence.length == 0) return Collections.emptyList();
+// public CRFSegment()
+//    {
+//        this(HanLP.Config.CRFSegmentModelPath);
+//    }        if (sentence.length == 0) return Collections.emptyList();
         char[] sentenceConverted = CharTable.convert(sentence);
         Table table = new Table();
         table.v = atomSegmentToTable(sentenceConverted);
